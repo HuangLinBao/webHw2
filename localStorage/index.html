@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="style.css">
+    <title>Choose Your background</title>
+</head>
+
+<body onload="storageInit()">
+    <h1>Lorem ipsum...</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis natus asperiores voluptas aut quis ad laudantium debitis non eveniet impedit ea dicta culpa pariatur, nulla atque, perspiciatis modi officiis cum itaque, accusamus possimus eligendi
+        odio. Architecto sed, optio explicabo exercitationem hic tempore distinctio nisi praesentium eveniet eaque, iste quas molestiae beatae eum tempora magni quos aut qui laborum assumenda dolorem veniam. Accusantium deserunt beatae sit nulla quae
+        eius suscipit natus consequuntur nobis aliquid error omnis repellendus perspiciatis dolor quos exercitationem mollitia, voluptate libero nostrum itaque ipsa quia repellat reiciendis? Corrupti nihil alias magni adipisci exercitationem nobis atque
+        accusantium quas facilis mollitia id delectus incidunt, numquam asperiores cumque quam earum eligendi, at libero saepe natus! Tempore esse sint animi labore consequatur! Quas tempore natus omnis? Commodi iusto dolorem debitis sequi repellendus
+        iure tempora deserunt nobis sapiente maxime culpa harum voluptatem vel, alias consequuntur! Aut labore similique ipsum tenetur? Laudantium, tempore! Labore consectetur consequatur aliquid quas aut libero! Voluptatem, rem sint? Pariatur iste quae
+        dolorem dolor, minima mollitia repudiandae voluptate optio.</p>
+
+    <div class="popUp" id="popup">
+        <div class="overLay" id="Overlay"></div>
+        <div class="content" id="Content">
+            <h2>Choose Your Wallpaper</h2>
+            <ul>
+                <li>
+                    <label for="myRadioID1" class="radio">
+                        <img src="1920x1080.jpg" alt="">
+                    <input type="radio" name="myRadioField" id="myRadioID1" class="radioInput"value="1920x1080">
+                    <div class="radioCircle">
+
+                    </div>
+                    
+                    </label>
+                </li>
+                <li>
+                    <label for="myRadioID2" class="radio">
+                        <img src="1920x1080web.jpg" alt="">
+                    <input type="radio" name="myRadioField" id="myRadioID2" class="radioInput" value="1920x1080web">
+                    <div class="radioCircle">
+
+                    </div>
+                    
+                    </label>
+                </li>
+                <li>
+                    <label for="myRadioID3" class="radio">
+                        <img src="Ra-1920x1080.jpg" alt="">
+                    <input type="radio" name="myRadioField" id="myRadioID3" class="radioInput"value="Ra-1920x1080">
+                    <div class="radioCircle">
+
+                    </div>
+                    
+                </label>
+                </li>
+                <li>
+                    <label for="myRadioID4" class="radio">
+                        <img src="Underwater1920x1080.jpg" alt="">
+                    <input type="radio" name="myRadioField" id="myRadioID4" class="radioInput"value="Underwater1920x1080">
+                    <div class="radioCircle">
+
+                    </div>
+                    
+                    </label>
+                </li>
+                <li>
+                    <label for="myRadioID5" class="radio">
+                        <img src="wallpaper-firstsunshine1920x1080.jpg" alt="">
+                    <input type="radio" name="myRadioField" id="myRadioID5" class="radioInput"value="wallpaper-firstsunshine1920x1080">
+                    <div class="radioCircle">
+
+                    </div>
+                    
+                    </label>
+                </li>
+            </ul>
+            <button class="chooseWallpaper" onclick="saveToStorage()">Choose</button>
+        </div>
+    </div>
+    <button class="revert" id="revertButton" onclick="deleteBackground()">Revert Back</button>
+</body>
+<script>
+    function setBackground(pic) {
+        let picRef = "url('" + pic + ".jpg')";
+        document.querySelector("body").style.backgroundImage = picRef;
+        document.getElementById('popup').style.visibility = 'hidden';
+        document.getElementById('Overlay').style.visibility = 'hidden';
+        document.getElementById('Content').style.visibility = 'hidden';
+        document.querySelector("body").style.color = "#ced6e0";
+        document.getElementById('revertButton').style.visibility = 'visible';
+    }
+
+    function storageInit() {
+        let s = localStorage.getItem("FavBackgroundImgName");
+        if (s == null) {
+            localStorage.setItem("FavBackgroundImgName", "");
+        } else {
+            setBackground(s);
+        }
+    }
+
+    function saveToStorage() {
+        let radio = document.getElementsByName("myRadioField");
+        for (let i = 0; i < radio.length; i++) {
+            if (radio[i].checked) {
+                localStorage.setItem("FavBackgroundImgName", radio[i].value);
+                setBackground(radio[i].value);
+                break;
+            }
+        }
+    }
+
+
+
+    function deleteBackground() {
+        localStorage.clear("FavBackgroundImgName");
+        document.querySelector("body").style.background = "#f1f2f6";
+        document.getElementById('popup').style.visibility = 'visible';
+        document.getElementById('Overlay').style.visibility = 'visible';
+        document.getElementById('Content').style.visibility = 'visible';
+        document.querySelector("body").style.color = "#2f3542";
+        document.getElementById('revertButton').style.visibility = 'hidden';
+    }
+</script>
+
+</html>
